@@ -419,7 +419,7 @@ class SnappPay extends PortAbstract implements PortInterface
 
             $client = new Client();
 
-            $payload = $this->getPartialRefundPayload($params, $transaction, $amount);
+            $payload = $this->getPartialRefundPayload($params, $transaction);
 
             $response = $client->request('POST', "{$this->gateUrl}/payment/v1/update", [
                     'json'    => $payload,
@@ -448,12 +448,12 @@ class SnappPay extends PortAbstract implements PortInterface
         }
     }
 
-    protected function getPartialRefundPayload($params, $transaction, $amount)
+    protected function getPartialRefundPayload($params, $transaction)
     {
         $meta = json_decode($transaction->meta, true);
 
         $cartList = [];
-        $orderAmount = 0;
+        $amount = 0;
 
         $discountAmount = isset($params['discountAmount'])
             ? $params['discountAmount']
@@ -490,6 +490,7 @@ class SnappPay extends PortAbstract implements PortInterface
                 : 0;
 
             $totalAmount = $cartItemsTotal + $shippingAmount + $taxAmount;
+            $amount += $totalAmount;
 
             $cartList[] = [
                 'cartId'             => $cart['cartId'],
