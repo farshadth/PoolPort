@@ -101,7 +101,7 @@ class Pasargad extends PortAbstract implements PortInterface
                     'callbackApi'    => $this->buildRedirectUrl($this->config->get('pasargad.callback-url')),
                     'mobileNumber'   => $this->config->get('pasargad.user-mobile', ''),
                     'invoice'        => "$invoice",
-                    'invoiceDate'    => jdate('Y/m/d H:i:s'),
+                    'invoiceDate'    => \PoolPort\Jalali::date('Y/m/d H:i:s'),
                     'serviceCode'    => self::SERVICE_CODE,
                     'serviceType'    => self::SERVICE_TYPE,
                     'terminalNumber' => $this->config->get('pasargad.terminal-number'),
