@@ -214,7 +214,9 @@ class DigiPay extends PortAbstract implements PortInterface
         try {
             $client = new Client();
             $items = $this->getMeta('items');
-            $products = collect($items)->pluck('brand')->toArray();
+            $products = array_map(function ($item) {
+                return isset($item['brand']) ? $item['brand'] : null;
+            }, (array) $items);
             $trackingCode = $this->getMeta('trackingCode');
 
             $response = $client->request("POST", "{$this->gateUrl}/purchases/deliver?type={$_POST['type']}", [

@@ -176,6 +176,8 @@ abstract class PortAbstract
         $this->transactionId = intval($transaction->id);
         $this->amount = intval($transaction->price);
         $this->refId = $transaction->ref_id;
+
+        return $this;
     }
 
     /**
@@ -312,7 +314,7 @@ abstract class PortAbstract
 
             $dbh->commit();
 
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             $dbh->rollBack();
 
             if (isset($e->errorInfo[1]) && $e->errorInfo[1] == 1062) {
@@ -321,7 +323,7 @@ abstract class PortAbstract
 
             throw $e;
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $dbh->rollBack();
             throw $e;
         }

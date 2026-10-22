@@ -46,7 +46,7 @@ class SoapClient
      * @param int $attempts
      * @param \Closure $statements
      *
-     * @return void
+     * @return mixed
      */
     protected function attempt($attempts, Closure $statements)
     {
