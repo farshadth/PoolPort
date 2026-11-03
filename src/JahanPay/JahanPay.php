@@ -58,7 +58,7 @@ class JahanPay extends PortAbstract implements PortInterface
      */
     public function redirect()
     {
-        return header('Location: '.$this->gateUrl.$this->refId());
+        header('Location: '.$this->gateUrl.$this->refId());
     }
 
     /**

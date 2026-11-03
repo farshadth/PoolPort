@@ -89,7 +89,7 @@ class Top extends PortAbstract implements PortInterface
                 'auth'    => $this->getAuth(),
                 "json"    => [
                     'MerchantOrderId'   => $merchantOrderId,
-                    'MerchantOrderDate' => now(),
+                    'MerchantOrderDate' => (new \DateTime('now', new \DateTimeZone('UTC')))->format('Y-m-d\TH:i:s.u\Z'),
                     'AdditionalData'    => !empty($this->items['AdditionalData']) ? json_encode($this->items['AdditionalData']) : "",
                     'Amount'            => (int)$this->amount,
                     'CallBackUrl'       => $this->buildRedirectUrl($this->config->get('top.callback-url')),
@@ -142,7 +142,7 @@ class Top extends PortAbstract implements PortInterface
                 "json"    => [
                     'token'               => $meta['token'],
                     'MerchantOrderId'     => $meta['MerchantOrderId'],
-                    'transactionDateTime' => now()->format('Y-m-d'),
+                    'transactionDateTime' => date('Y-m-d'),
                     'additionalData'      => !empty($this->items['additionalData']) ? $this->items['additionalData'] : "",
                 ],
                 'headers' => [

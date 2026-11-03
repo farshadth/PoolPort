@@ -125,7 +125,7 @@ class MellatStaff extends PortAbstract implements PortInterface
                 'mobile'     => $mobile,
                 'status'     => self::PENDING,
                 'items'      => !empty($this->items) ? $this->items : [],
-                'created_at' => now()->format('Y-m-d H:i:s'),
+                'created_at' => date('Y-m-d H:i:s'),
             ]);
 
         } catch (\Exception $e) {
@@ -159,6 +159,7 @@ class MellatStaff extends PortAbstract implements PortInterface
 
             $this->transactionSucceed();
 
+            return true;
         } catch (\Exception $e) {
             $this->transactionFailed();
             $this->markStatus(self::ERROR);
@@ -318,7 +319,7 @@ class MellatStaff extends PortAbstract implements PortInterface
                     'mobile'            => $meta['mobile'],
                     'token'             => $this->creditToken,
                     'transactionNumber' => $this->refId(),
-                    'transactionDate'   => now()->format('Y-m-d'),
+                    'transactionDate'   => date('Y-m-d'),
                 ],
                 "headers" => [
                     'Authorization' => "Bearer {$this->authToken}",

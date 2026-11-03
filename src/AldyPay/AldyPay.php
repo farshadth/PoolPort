@@ -79,7 +79,7 @@ class AldyPay extends PortAbstract implements PortInterface
                 'order_items'            => $this->items,
                 'amount'                 => $this->amount,
                 'refunded_amount'        => 0,
-                'created_at'             => now()->format('Y-m-d H:i:s'),
+                'created_at'             => date('Y-m-d H:i:s'),
                 'is_transaction_created' => false,
                 'is_invoice_attached'    => false
             ]);
